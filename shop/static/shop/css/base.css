@@ -1,0 +1,34 @@
+body {
+    padding-left: 4%;
+}
+.cart {
+    color: green;
+    font-size: 25px;
+}
+.item {
+    margin-bottom: 20px;
+}
+.items {
+    margin-bottom: 5px;
+}
+.logo {
+    color: #C71585;
+}
+.product-detail {
+    margin-top: 20px;
+}
+.carts {
+    font-size: 20px;
+    border-spacing: 0px 0px;
+}
+.col {
+    color: white;
+    text-align: center;	
+}
+.total {
+    color: white;
+    text-align: center;
+}
+.total2 {
+    text-align: center;
+}
