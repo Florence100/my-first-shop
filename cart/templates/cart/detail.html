@@ -4,16 +4,16 @@
     Your shopping cart
 {% endblock %}
 {% block content %}
-    <h2>Ваша корзина</h2>
-    <table class="carts" width="95%">
-	    <col style="width:20%">
+    <h2 class="cart1">Ваша корзина</h2>
+	<table class="carts" width="95%">
 	    <col style="width:16%">
+	    <col style="width:20%">
 	    <col style="width:16%">
 		<col style="width:16%">
 	    <col style="width:16%">
 	    <col style="width:16%">	
         <thead>
-        <tr bgcolor="#DB7093	" height="60px">		    
+        <tr  bgcolor="#DB7093" height="60px">		    
             <td class="col">Фото</td>
             <td class="col">Наименование</td>
             <td class="col">Количество</td>
@@ -25,10 +25,10 @@
         <tbody>
         {% for item in cart %}
             {% with product=item.product %}
-                <tr class="total2" bgcolor="#FAEBD7" height="285px" >
+                <tr class="total2" bgcolor="#FFF5EE" height="130px" >
                     <td>
                         <a href="{{ product.get_absolute_url }}">
-                            <img src="
+                            <img width="110" src="
                                 {% if product.image %}
                                     {{ product.image.url }}
                                 {% else %}
@@ -38,22 +38,22 @@
                     </td>
                     <td>{{ product.name }}</td>
                     <td>{{ item.quantity }}</td>
-                    <td><a href="{% url "cart:cart_remove" product.id%}">Удалить</a></td>
-                    <td class="num"> BYN {{ item.price }}</td>
-                    <td class="num"> BYN {{ item.total_price }}</td>
+                    <td><a class="selected" href="{% url "cart:cart_remove" product.id%}">Удалить</a></td>
+                    <td class="num"> {{ item.price }} BYN</td>
+                    <td class="num"> {{ item.total_price }} BYN</td>
                 </tr>
             {% endwith %}
         {% endfor %}
-        <tr class="total" bgcolor="#DB7093	" height="60px">
+        <tr class="total" bgcolor="#DB7093" height="60px">
             <td>Всего</td>
             <td colspan="4"></td>
-            <td class="num"> BYN {{ cart.get_total_price }}</td>
+            <td class="num"> {{ cart.get_total_price }} BYN</td>
         </tr>
         </tbody>
     </table>
     <p class="text-right">
-        <a href="{% url "shop:product_list" %}" class="button light">Продолжить покупки</a>
-        <a href="#" class="button">Проверить</a>
+	    <a href="{% url "shop:product_list" %}" class="button light">Продолжить покупки</a><br>
+        <a href="{% url "orders:order_create" %}" class="button">Оформить заказ</a>       
     </p>
 {% endblock %}
 

@@ -1,10 +1,20 @@
 body {
     padding-left: 4%;
 }
-.cart {
-    color: green;
-    font-size: 25px;
+.cart {    
+	float: right;
+	margin-right: 70px;
+	font-size: 20px;
 }
+.cart1 {
+	clear: both;	
+	height: 60px;
+	line-height:75px;
+	padding: 10px 0 0 0;	
+}
+
+	
+
 .item {
     margin-bottom: 20px;
 }
@@ -12,10 +22,19 @@ body {
     margin-bottom: 5px;
 }
 .logo {
+	float: left;
     color: #C71585;
+	font: 65px/40px Brush Script MT, Brush Script Std, cursive;
 }
-.product-detail {
-    margin-top: 20px;
+.logo:hover {
+	color: #800080;
+}
+.selected:hover {
+	color: #C71585;
+}
+.product-detail2 {
+	clear: both;
+    padding: 30px 0 0 0;	
 }
 .carts {
     font-size: 20px;
@@ -31,4 +50,68 @@ body {
 }
 .total2 {
     text-align: center;
+}
+.sidebar {
+	line-height: 1.2;
+	font-size: 120%;
+	clear: both;
+	padding: 10px 0 0 0;	
+}
+.product-list h3{
+	font-size: 130%;
+}
+.order-info {
+	float: right;
+	font-size: 20px;
+	padding: 5px 40px 10px 40px;
+	background: #FFF5EE;
+	margin-right: 200px;
+}
+.order-info h3, .order-info p {
+	color: #C71585;
+	font-weight: bold;
+}
+.order-form {
+	float: left;
+	padding: 0 20px 10px 0;
+	font-size: 20px;
+	width: 40%;
+}
+input[type=text], input[type=email] {
+    width: 90%;
+	padding: 10px;
+	border-radius: 7px;
+	border: 1px solid #C71585;
+}
+input[type=email]:hover {
+	background: #FFF5EE;
+}
+input[type=text]:hover {
+	background: #FFF5EE;
+}
+.input1 input[type=submit] {
+	width: 200px;
+	padding: 10px;
+	border-radius: 7px;
+	border: 1px solid #DB7093;
+	background: #C71585;
+	font-size: 17px;
+	color: white;
+}
+.input1 input[type=submit]:hover {
+	background: #800080;
+}
+.thanks {
+	text-align: center;
+	margin-right: 70px;
+	height: 70px;
+	padding: 120px 15px 0 0;
+	font-size: 40px;
+}
+.thanks1 {
+	text-align: center;
+	margin-right: 70px;
+	padding: 0 5px 0 0;
+	height: 50px;
+	font-size: 23px;
 }
