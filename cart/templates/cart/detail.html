@@ -4,56 +4,44 @@
     Your shopping cart
 {% endblock %}
 {% block content %}
-    <h2 class="cart1">Ваша корзина</h2>
-	<table class="carts" width="95%">
-	    <col style="width:16%">
-	    <col style="width:20%">
-	    <col style="width:16%">
-		<col style="width:16%">
-	    <col style="width:16%">
-	    <col style="width:16%">	
-        <thead>
-        <tr  bgcolor="#DB7093" height="60px">		    
-            <td class="col">Фото</td>
-            <td class="col">Наименование</td>
-            <td class="col">Количество</td>
-            <td class="col">Удалить</td>
-            <td class="col">Цена за единицу</td>
-            <td class="col">Итоговая стоимость</td>			
-        </tr>
-        </thead>
-        <tbody>
-        {% for item in cart %}
-            {% with product=item.product %}
-                <tr class="total2" bgcolor="#FFF5EE" height="130px" >
-                    <td>
-                        <a href="{{ product.get_absolute_url }}">
-                            <img width="110" src="
-                                {% if product.image %}
-                                    {{ product.image.url }}
-                                {% else %}
-                                    {% static "img/no_image.png" %}
-                                {% endif %}">
-                        </a>
-                    </td>
-                    <td>{{ product.name }}</td>
-                    <td>{{ item.quantity }}</td>
-                    <td><a class="selected" href="{% url "cart:cart_remove" product.id%}">Удалить</a></td>
-                    <td class="num"> {{ item.price }} BYN</td>
-                    <td class="num"> {{ item.total_price }} BYN</td>
-                </tr>
-            {% endwith %}
-        {% endfor %}
-        <tr class="total" bgcolor="#DB7093" height="60px">
-            <td>Всего</td>
-            <td colspan="4"></td>
-            <td class="num"> {{ cart.get_total_price }} BYN</td>
-        </tr>
-        </tbody>
-    </table>
-    <p class="text-right">
-	    <a href="{% url "shop:product_list" %}" class="button light">Продолжить покупки</a><br>
-        <a href="{% url "orders:order_create" %}" class="button">Оформить заказ</a>       
-    </p>
+
+    <p class="basket-title">Ваша корзина</p>
+	<div class="backet-table">
+	  <table class="detail-cart">
+	    <tr class="table-top">
+		  <td class="column-name" colspan="3">Наименование</td>
+		  <td class="column-sum">Сумма, бел.руб.</td>
+	    </tr>
+		{% for item in cart %}
+		  {% with product=item.product %}
+		    <tr>
+			  <td class="column-quantity">
+			    {{ item.quantity }}
+				<span>x</span> 
+			  </td>
+			  <td class="column-product">
+			    <a href="{{ product.get_absolute_url }}">
+			      {{ product.name }}
+			    </a>
+			  </td>
+			  <td class="column-delete">
+			    <a href="{% url "cart:cart_remove" product.id%}">Удалить</a>
+			  </td>
+			  <td class="column-price">
+			    {{ item.total_price }} BYN
+			  </td>
+			</tr>	  
+	      {% endwith %}
+		{% endfor %}
+		<tr class="table-bottom">
+		  <td class="column-name" colspan="3">Итоговая сумма</td>
+		  <td class="column-price-all">{{ cart.get_total_price }} BYN</td>
+		</tr>
+	  </table>
+	</div>
+	<div class="basket-botton">
+	  <a href="{% url "orders:order_create" %}"><input class="add-basket basket-botton-buy" type="submit" value="Оформить заказ"></a>
+	  <a href="{% url "shop:product_list" %}"><input class="add-basket basket-botton-menu" type="submit" value="Продолжить покупки"></a>	  	  
+    </div>
 {% endblock %}
 

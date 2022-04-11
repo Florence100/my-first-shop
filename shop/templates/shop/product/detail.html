@@ -1,18 +1,26 @@
 {% extends "shop/base.html" %}
 {% load static %}
 {% block title %}
-    {% if category %}{{ category.title }}{% else %}Products{% endif %}
+    {% if category %}{{ category.name }}{% else %}Products{% endif %}
 {% endblock %}
+
 {% block content %}
     <div class="product-detail">
-	    <div class="product-detail2"><img src="{% if product.image %}{{ product.image.url }}{% else %}{% static "img/no_image.png" %}{% endif %}"></div>
-		<h3>{{ product.name }}</h3>
-		<p class="price"> {{ product.price }} BYN</p>
+	  <div class="product-detail-image">
+	    <img width="280" src="{% if product.image %}{{ product.image.url }}{% else %}{% static "img/no_image.png" %}{% endif %}">
+	  </div>
+	  <div class="product-detail-description">
+	    <p class="product-detail-description-name">{{ product.name }}</p>
+		<p class="product-detail-description-price"> {{ product.price }} BYN</p>
 		{{ product.description|linebreaks }}
-	</div>
-	<form action="{% url "cart:cart_add" product.id %}" method="post">	    
-		{{ cart_product_form }}
-		{% csrf_token %}
-		<input type="submit" value="Добавить в корзину">	
-	</form>
+		<div class="form-add-basket">
+		  <form action="{% url "cart:cart_add" product.id %}" method="post">	    
+		    <label>
+		      {{ cart_product_form }}
+		      {% csrf_token %}
+		      <input class="add-basket" type="submit" value="Добавить в корзину">
+            </label>			
+	      </form>
+        </div>		  
+	  </div>
 {% endblock %}

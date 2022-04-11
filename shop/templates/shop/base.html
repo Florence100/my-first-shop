@@ -1,36 +1,79 @@
 <!DOCTYPE html>
 {% load static %}
-<html>
-<head>
-    <meta charset="utf-8"/>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8">
     <title>{% block title %}Truefeel{% endblock %}</title>
 	<link href= "/static/shop/css/base.css" rel="stylesheet">
-	<!--<link href= "{% static 'shop/css/base.css' %}" rel="stylesheet">-->
     <meta name="description" content="Шоколад и конфеты ручной работы, подарочные наборы в Могилеве">
 	<meta name="keywords" content="шоколад, конфеты, трюфели, фигурки из шоколада, подарочные наборы, могилев, беларусь">	
-</head>
-<body>    
-    <div id="header">    
-    <h1><a href="/" class="logo">Truefeel</a></h1>
-	</div>
-    <div id="subheader">        
-		<div class="cart">
-		    {% with total_items=cart|length %}
+  </head>
+  <body>
+    <header class="main-header clearfix">
+	  <div class="container">
+	    <div class="header-top">
+		  <div class="logo">
+		    <h1><a href="/">Truefeel</a></h1>
+		  </div>
+		  <div class="main-menu">
+		    <ul>
+              <li {% if not category %}{% endif %}>
+                <a href="{% url "shop:product_list" %}">Все</a>
+              </li>
+              {% for c in categories %}
+		        <li {% if category.slug == c.slug %}{% endif %}>              
+                  <a href="{{ c.get_absolute_url }}">{{ c.name }}</a>				  
+                </li>
+	          {% endfor %}
+            </ul>
+		  </div>		  
+		  <div class="basket">		    
+		      {% with total_items=cart|length %}
 			    {% if cart|length > 0 %}
-				    <img width="40" src="{% static "shop/img/basket.png" %}">
-					<a class="selected" href="{% url "cart:cart_detail" %}">
-						{{ cart.get_total_price }} BYN
-					</a>
-				{% else %}
-				    <img width="40" src="{% static "shop/img/basket.png" %}">
-					    0 BYN
-				{% endif %}
-			{% endwith %}
-		</div>		
-    </div>
-    <div id="content">
-    {% block content %}
-    {% endblock %}	
-    </div>
-</body>
+			      <img class="basket-item" width="40" src="{% static "shop/img/basket.png" %}">
+			      <a href="{% url "cart:cart_detail" %}">
+			        {{ cart.get_total_price }} BYN
+			      </a>
+			    {% else %}
+			       <img width="40" src="{% static "shop/img/basket.png" %}">
+                   0 BYN
+			    {% endif %}
+			  {% endwith %}		  
+		  </div>		
+		</div>			  
+	  </div>	  
+    </header>
+	<section class="my-content">
+	  <div class="container">
+	    <div id="content">
+	      {% block content %}
+          {% endblock %}	
+        </div>		  
+	  </div>
+	</section>
+	<footer class="main-footer">
+	  <div class="container">
+	    <div class="contacts">
+	      <div class="contacts-title">Наши контакты</div>
+		    <div class="contacts-info">
+	          <div class="telephone">
+		        <img class="telephone-item" width="17" src="{% static "shop/img/telephone.png" %}">
+		        +375 29 8454334
+		      </div><br>
+		      <div class="email">
+		        <img class="email-item" width="20" src="{% static "shop/img/email.png" %}">
+		        Anastasia.Gribovskaia@gmail.com
+		      </div><br>
+		      <div class="instagram">		        
+		        <a href="https://www.instagram.com/truefeelinlove/" class="social-btn social-btn-fb">
+				<img class="instagram-item" width="17" src="{% static "shop/img/instagram.png" %}">
+				truefeelinlove
+				</a>
+		      </div><br>
+		    </div>
+        </div>		  
+	    <div class="copyright">Все права защищены © 2022</div>
+	  </div>
+	</footer>
+  </body>
 </html>

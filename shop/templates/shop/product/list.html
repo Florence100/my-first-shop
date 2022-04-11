@@ -4,33 +4,18 @@
     {% if category %}{{ category.name }}{% else %}Products{% endif %}
 {% endblock %}
 {% block content %}
-    <div class="sidebar">	    
-        <h3>Категории</h3>
-        <ul>
-            <li {% if not category %}class="selected"{% endif %}>
-                <a class="selected" href="{% url "shop:product_list" %}">Все</a>
-            </li>
-            {% for c in categories %}
-                <li class="selected"{% if category.slug == c.slug %}{% endif %}>
-                    <a class="selected" href="{{ c.get_absolute_url }}">{{ c.name }}</a>
-                </li>
-            {% endfor %}
-        </ul>	    
-	</div>
-    <div id="main" class="product-list">	    
-            <h3>{% if category %}{{ category.name }}{% else %}Все{% endif %}</h3>
-            {% for product in products %}		
-                <div class="item">			        				
-                    <a href="{{ product.get_absolute_url }}">
-                        <img width="270" src="{% if product.image %}{{ product.image.url }}{% else %}{% static "shop/img/no_image.png" %}{% endif %}">
-                    </a>
-					<div class="items">
-                        <a class="selected" href="{{ product.get_absolute_url }}">{{ product.name }}</a>
-					</div>
-					<div class="items">
-                         {{ product.price }} BYN
-					</div>	
-				</div>            
-            {% endfor %}
+    <div class="product-list">	
+        <div class="product-list-menu">{% if category %}{{ category.name }}{% else %}Все{% endif %}</div>
+        {% for product in products %}		
+          <div class="product-list-item">		        				
+            <a href="{{ product.get_absolute_url }}">
+              <img width="265" height="265" src="{% if product.image %}{{ product.image.url }}{% else %}{% static "shop/img/no_image.png" %}{% endif %}">
+            </a>
+		    <div class="product-description">
+              <a class="product-description-name" href="{{ product.get_absolute_url }}">{{ product.name }}</a><br>
+			  <div class="product-description-price">{{ product.price }} BYN</div>
+			</div>
+		  </div>	  
+        {% endfor %}
     </div>
 {% endblock %}

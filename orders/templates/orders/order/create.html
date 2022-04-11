@@ -1,24 +1,59 @@
 {% extends "shop/base.html" %}
-
 {% block title %}Checkout{% endblock %}
-
 {% block content %}
-    <br><h2 class="cart1">Оформление заказа</h2>
-    <div class="order-info">
-        <h3>Ваш заказ</h3>
-		<ul>
+    <div class="clearfix">
+      <p class="create-title">Оформление заказа</p>
+      <div class="order-info">
+        <p class="order-info-title">Ваш заказ</p>
+	      <ul class="order-details">
             {% for item in cart %}
-                <li>				
-                    {{ item.quantity }} x {{ item.product.name }}
-					<span>{{ item.total_price }} BYN</span>
-                </li>
+              <li>				
+                {{ item.quantity }} x {{ item.product.name }}
+			    <span>{{ item.total_price }} BYN</span>
+              </li>
             {% endfor %}
-        </ul>
-        <p>Итог: {{ cart.get_total_price }} BYN</p>
-    </div>
-    <form action="." method="post" class="order-form">
-        {{ form.as_p }}
-        <p class="input1"><input type="submit" value="Оформить заказ"></p>
-        {% csrf_token %}
-    </form>
+          </ul>
+        <p class="order-info-title">Итог: {{ cart.get_total_price }} BYN</p>
+      </div>
+	  <div class="contacts-customer">
+	    <form action="." method="post" class="order-form">
+	      <table>
+		    <tr>
+		      <td class="order-form-col"><label for="id_first_name">Имя *</label></td>
+			  <td><input type="text" name="first_name" maxlength="50" required id="id_first_name"></td>
+		    </tr>
+		    <tr>
+		      <td><label for="id_last_name">Фамилия *</label></td>
+		      <td><input type="text" name="last_name" maxlength="50" required id="id_last_name"></td>
+		    </tr>
+		    <tr>
+		      <td><label for="id_phoneNumber">Номер телефона *</label></td>
+			  <td><input type="text" name="phoneNumber" maxlength="16" required id="id_phoneNumber"></td>			
+		    </tr>
+		    <tr>
+		      <td><label for="id_email">email *</label></td>
+			  <td><input type="email" name="email" maxlength="254" required id="id_email"></td>			
+		    </tr>
+		    <tr>
+		      <td><label for="id_address">Адрес *</label></td>
+			  <td><input type="text" name="address" maxlength="250" required id="id_address"></td>			
+		    </tr>
+		    <tr>
+		      <td><label for="id_postal_code">Почтовый индекс *</label></td>
+			  <td><input type="text" name="postal_code" maxlength="20" required id="id_postal_code"></td>			
+		    </tr>
+		    <tr>
+		      <td><label for="id_city">Город *</label></td>
+			  <td><input type="text" name="city" maxlength="100" required id="id_city"></td>			
+		    </tr>
+		    <tr>
+		      <td><label for="id_comment">Комментарий к заказу</label></td>
+			  <td><textarea name="comment" rows="3" maxlength="250" id="id_comment"></textarea></td>			
+		    </tr>
+          </table>
+          <p>* Поля обязательны к заполнению</p>		
+	      <p><input class="confirm" type="submit" value="Оформить заказ"></p>
+          {% csrf_token %}
+	    </form>
+	</div>
 {% endblock %}

@@ -2,10 +2,13 @@ from django.shortcuts import render
 from .models import OrderItem
 from .forms import OrderCreateForm
 from cart.cart import Cart
+from shop.models import Product, Category
 
 
 def order_create(request):
     cart = Cart(request)
+    category = None
+    categories = Category.objects.all()
     if request.method == 'POST':
         form = OrderCreateForm(request.POST)
         if form.is_valid():
@@ -18,8 +21,11 @@ def order_create(request):
             # очистка корзины
             cart.clear()
             return render(request, 'orders/order/created.html',
-                          {'order': order})
+                          {'order': order, 'category': category,
+                          'categories': categories})
     else:
         form = OrderCreateForm
     return render(request, 'orders/order/create.html',
-                  {'cart': cart, 'form': form})
+                  {'cart': cart, 'form': form,
+                  'category': category,
+                  'categories': categories})
